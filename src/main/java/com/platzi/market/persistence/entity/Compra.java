@@ -13,6 +13,26 @@ public class Compra {
     @Column(name = "id_compra")
     private Integer idCompra;
 
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ComprasProducto> productos) {
+        this.productos = productos;
+    }
+
     @Column(name = "id_cliente")
     private String idCliente;
 
@@ -21,14 +41,14 @@ public class Compra {
     @Column(name = "medio_pago")
     private String medioPago;
 
-    private String comentatio;
+    private String comentario;
     private String estado;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "producto")
+    @OneToMany(mappedBy = "compra", cascade = { CascadeType.ALL} )
     private List<ComprasProducto> productos;
 
     public Integer getIdCompra() {
@@ -63,12 +83,8 @@ public class Compra {
         this.medioPago = medioPago;
     }
 
-    public String getComentatio() {
-        return comentatio;
-    }
-
-    public void setComentatio(String comentatio) {
-        this.comentatio = comentatio;
+    public String getComentario() {
+        return comentario;
     }
 
     public String getEstado() {
